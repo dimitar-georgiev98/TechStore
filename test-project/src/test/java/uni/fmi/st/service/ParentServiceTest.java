@@ -85,7 +85,7 @@ public class ParentServiceTest {
 		childrens.add(child);
 		
 		String message = parentService.addParent("    ", "Драганов", true, childrens);
-		assertEquals("Успешно добавен родител!", message);
+		assertEquals("Въведете име с поне 3 символа!", message);
 	}
 	
 	/**
@@ -130,7 +130,7 @@ public class ParentServiceTest {
 		childrens.add(child);
 		
 		String message = parentService.addParent("Драган", "   ", true, childrens);
-		assertEquals("Успешно добавен родител!", message);
+		assertEquals("Въведете фамилия с поне 3 символа!", message);
 	}
 	
 	/**

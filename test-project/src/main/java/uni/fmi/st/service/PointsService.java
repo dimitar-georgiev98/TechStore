@@ -43,11 +43,11 @@ public class PointsService {
 		for (Parent parent : parents) {
 			for (Child child : parent.getChildrens()) {
 
-				if (firstName == null || firstName.length() < 3) {
+				if (firstName == null || firstName.length() < 3 || firstName.isBlank()) {
 					return "Въведете име с поне 3 символа!";
 				}
 
-				if (lastName == null || lastName.length() < 3) {
+				if (lastName == null || lastName.length() < 3 || lastName.isBlank()) {
 					return "Въведете фамилия с поне 3 символа!";
 				}
 

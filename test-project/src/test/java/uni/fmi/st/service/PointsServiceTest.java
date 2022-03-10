@@ -200,7 +200,24 @@ public class PointsServiceTest {
 		 parentService.addParent("Драган", "Драганов", true, childrens);
 		 PointsService rankingService = new PointsService(parentService.getParents());
 		 String message = rankingService.pointsByFirstAndLastName("      ", "Петров");
-		 assertEquals("       Петров приет за класиране с 5 точки!", message);
+		 assertEquals("Въведете име с поне 3 символа!", message);
+	}
+	
+	/**
+	 * test {@link PointsService#rankingByFirstAndLastName(String,String)}
+	 * with invalid last name.
+	 */
+	@Test
+	public void testPointsByFirstAndLastNameWithInvalidLastName2() {
+		 ParentService parentService = new ParentService();
+		 
+		 Child child = new Child("Пешо", "Петров", true, true, true, true);
+		 ArrayList<Child> childrens = new ArrayList<>();
+		 childrens.add(child);
+		 parentService.addParent("Драган", "Драганов", true, childrens);
+		 PointsService rankingService = new PointsService(parentService.getParents());
+		 String message = rankingService.pointsByFirstAndLastName("Пешо", "      ");
+		 assertEquals("Въведете фамилия с поне 3 символа!", message);
 	}
 	
 	/**
@@ -267,7 +284,7 @@ public class PointsServiceTest {
 		 childrens.add(child);
 		 parentService.addParent("Драган", "Драганов", true, childrens);
 		 PointsService rankingService = new PointsService(parentService.getParents());
-		 String message = rankingService.pointsByFirstAndLastName("", "    ");
+		 String message = rankingService.pointsByFirstAndLastName("", "     ");
 		 assertEquals("Въведете име с поне 3 символа!", message);
 	}
 }

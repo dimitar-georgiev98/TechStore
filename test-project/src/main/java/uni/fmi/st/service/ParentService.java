@@ -46,13 +46,13 @@ public class ParentService {
 	 * @return
 	 */
 	public String addParent(String firstName, String lastName, boolean isWorking, ArrayList<Child> childrens) {
-		
-		if(firstName == null || firstName.length() < 3)
+				
+		if(firstName == null || firstName.length() < 3 || firstName.isBlank())
 	    {
 			return "Въведете име с поне 3 символа!";
 		}
 		
-		if(lastName == null || lastName.length() < 3)
+		if(lastName == null || lastName.length() < 3 || lastName.isBlank())
 		{
 			return "Въведете фамилия с поне 3 символа!";
 		}
