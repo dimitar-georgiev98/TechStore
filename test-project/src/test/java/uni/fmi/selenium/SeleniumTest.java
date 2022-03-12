@@ -7,16 +7,17 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import uni.fmi.selenium.models.DetailsScreenModel;
-import uni.fmi.selenium.models.WikipediaScreenModel;
+import uni.fmi.selenium.models.EmagDetailsModel;
+import uni.fmi.selenium.models.EmagScreenModel;
 
 public class SeleniumTest {
 
 	private static WebDriver driver;
-	private WikipediaScreenModel wikiScreenModel;
+	private EmagScreenModel emagScreenModel;
 	
 	@BeforeClass
 	public static void setupClass() {
@@ -26,7 +27,7 @@ public class SeleniumTest {
 	@Before
 	public void setup() {
 		driver = new ChromeDriver();
-		wikiScreenModel = new WikipediaScreenModel(driver);
+		emagScreenModel = new EmagScreenModel(driver);
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 	}
 	
@@ -36,69 +37,48 @@ public class SeleniumTest {
 	}
 	
 	@Test
-	public void testWikipediaScreen() throws InterruptedException {
-		driver.get("https://bg.wikipedia.org/wiki/%D0%9D%D0%B0%D1%87%D0%B0%D0%BB%D0%BD%D0%B0_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0");
+	public void testEmagScreen1() throws InterruptedException {
 		
-		final WebElement queryField = driver.findElement(By.id("searchInput"));
-		queryField.sendKeys("България");
-		final WebElement searchButton = driver.findElement(By.id("searchButton"));
-		searchButton.click();
-		final WebElement h1 = driver.findElement(By.id("firstHeading"));
-		assertEquals("България", h1.getText());
-		Thread.sleep(3000);		
-	}
-	
-	@Test
-	public void testWikipediaScreen2() throws InterruptedException {
-		wikiScreenModel.openScreen();
-		wikiScreenModel.setQueryParams("София");
+		driver.get("https://www.emag.bg/");
+		final WebElement queryField = driver.findElement(By.id("searchboxTrigger"));
+		queryField.sendKeys("Смартфон");
+		queryField.sendKeys(Keys.RETURN);
 
-		final DetailsScreenModel resultScreen = wikiScreenModel.clickSearchButton();
-		assertEquals("София", resultScreen.getHeaderValue());
+		Thread.sleep(3000);		
+	}
+	
+	@Test
+	public void testEmagScreen2() throws InterruptedException {
+		
+		driver.get("https://www.emag.bg/");
+		driver.findElement(By.className("navbar-aux-help-link")).click();
+
+		Thread.sleep(3000);		
+	}
+	
+	
+	@Test
+	public void testEmagScreen3() throws InterruptedException {
+		emagScreenModel.openScreen();
+		driver.findElement(By.id("my_cart")).click();
 		
 		Thread.sleep(3000);		
 	}
 	
 	@Test
-	public void testWikipediaScreen3() throws InterruptedException {
-		wikiScreenModel.openScreen();
-		wikiScreenModel.setQueryParams("Пловдив");
-		
-		final DetailsScreenModel resultScreen = wikiScreenModel.clickSearchButton();
-		assertEquals("Пловдив", resultScreen.getHeaderValue());
+	public void testEmagScreen4() throws InterruptedException {
+		emagScreenModel.openScreen();
+		emagScreenModel.setQueryParams("Лаптоп");
+		final EmagDetailsModel resultScreen = emagScreenModel.clickSearchButton();
 		
 		Thread.sleep(3000);
 	}
 	
 	@Test
-	public void testWikipediaScreen4() throws InterruptedException {
-		wikiScreenModel.openScreen();
-		wikiScreenModel.setQueryParams("Варна");
-		
-		final DetailsScreenModel resultScreen = wikiScreenModel.clickSearchButton();
-		assertEquals("Варна", resultScreen.getHeaderValue());
-		
-		Thread.sleep(3000);
-	}
-	
-	@Test
-	public void testWikipediaScreen5() throws InterruptedException {
-		wikiScreenModel.openScreen();
-		wikiScreenModel.setQueryParams("Бургас");
-		
-		final DetailsScreenModel resultScreen = wikiScreenModel.clickSearchButton();
-		assertEquals("Бургас", resultScreen.getHeaderValue());
-		
-		Thread.sleep(3000);
-	}
-	
-	@Test
-	public void testWikipediaScreen6() throws InterruptedException {
-		wikiScreenModel.openScreen();
-		wikiScreenModel.setQueryParams("Пазарджик");
-		
-		final DetailsScreenModel resultScreen = wikiScreenModel.clickSearchButton();
-		assertEquals("Пазарджик", resultScreen.getHeaderValue());
+	public void testEmagScreen5() throws InterruptedException {
+		emagScreenModel.openScreen();
+		emagScreenModel.setQueryParams("OLED TV");
+		final EmagDetailsModel resultScreen = emagScreenModel.clickSearchButton();
 		
 		Thread.sleep(3000);
 	}
